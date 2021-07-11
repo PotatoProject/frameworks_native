@@ -1062,6 +1062,14 @@ status_t GLESRenderEngine::drawLayers(const DisplaySettings& display,
             }
         }
     }
+
+    // Limit blur to the two frontmost layers for performance. We need one at the front
+    // and one behind for cross-fading and additional blurring. Rendering additional layers
+    // comes at a big performance penalty and makes little to no noticeable difference.
+    while (blurLayers.size() > 2) {
+        blurLayers.pop_front();
+    }
+
     const auto blurLayersSize = blurLayers.size();
 
     if (blurLayersSize == 0) {
@@ -1094,6 +1102,7 @@ status_t GLESRenderEngine::drawLayers(const DisplaySettings& display,
 
     setOutputDataSpace(display.outputDataspace);
     setDisplayMaxLuminance(display.maxLuminance);
+    setDisplayColorTransform(display.colorTransform);
 
     const mat4 projectionMatrix =
             ui::Transform(display.orientation).asMatrix4() * mState.projectionMatrix;
@@ -1102,6 +1111,7 @@ status_t GLESRenderEngine::drawLayers(const DisplaySettings& display,
         fillRegionWithColor(display.clearRegion, 0.0, 0.0, 0.0, 1.0);
     }
 
+    int blurredLayers = 0;
     Mesh mesh = Mesh::Builder()
                         .setPrimitive(Mesh::TRIANGLE_FAN)
                         .setVertices(4 /* count */, 2 /* size */)
@@ -1139,13 +1149,15 @@ status_t GLESRenderEngine::drawLayers(const DisplaySettings& display,
                 return status;
             }
 
-            status = mBlurFilter->render(blurLayersSize > 1);
+            status = mBlurFilter->render(blurLayersSize, blurredLayers);
             if (status != NO_ERROR) {
                 ALOGE("Failed to render blur effect! Aborting GPU composition for buffer (%p).",
                       buffer->handle);
                 checkErrors("Can't render blur filter");
                 return status;
             }
+
+            blurredLayers += 1;
         }
 
         mState.maxMasteringLuminance = layer->source.buffer.maxMasteringLuminance;
@@ -1160,7 +1172,7 @@ status_t GLESRenderEngine::drawLayers(const DisplaySettings& display,
         position[3] = vec2(bounds.right, bounds.top);
 
         setupLayerCropping(*layer, mesh);
-        setColorTransform(display.colorTransform * layer->colorTransform);
+        setColorTransform(layer->colorTransform);
 
         bool usePremultipliedAlpha = true;
         bool disableTexture = true;
@@ -1314,6 +1326,10 @@ void GLESRenderEngine::setupLayerTexturing(const Texture& texture) {
 
 void GLESRenderEngine::setColorTransform(const mat4& colorTransform) {
     mState.colorMatrix = colorTransform;
+}
+
+void GLESRenderEngine::setDisplayColorTransform(const mat4& colorTransform) {
+    mState.displayColorMatrix = colorTransform;
 }
 
 void GLESRenderEngine::disableTexturing() {
