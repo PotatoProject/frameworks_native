@@ -16,7 +16,7 @@
 
 #pragma once
 
-#ifndef __ANDROID_VNDK__
+/* #ifndef __ANDROID_VNDK__ */
 
 #include <binder/IPermissionController.h>
 
@@ -61,6 +61,6 @@ private:
 
 } // namespace android
 // ---------------------------------------------------------------------------
-#else // __ANDROID_VNDK__
+/* #else // __ANDROID_VNDK__
 #error "This header is not visible to vendors"
-#endif // __ANDROID_VNDK__
+#endif // __ANDROID_VNDK__ */

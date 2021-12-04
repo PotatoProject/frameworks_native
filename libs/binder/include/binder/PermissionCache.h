@@ -16,7 +16,7 @@
 
 #pragma once
 
-#ifndef __ANDROID_VNDK__
+/* #ifndef __ANDROID_VNDK__ */
 
 #include <stdint.h>
 #include <unistd.h>
@@ -80,6 +80,6 @@ public:
 // ---------------------------------------------------------------------------
 } // namespace android
 
-#else // __ANDROID_VNDK__
+/* #else // __ANDROID_VNDK__
 #error "This header is not visible to vendors"
-#endif // __ANDROID_VNDK__
+#endif // __ANDROID_VNDK__ */

@@ -162,9 +162,9 @@ cc_library {
                 },
             },
         },
-        vendor: {
+        /* vendor: {
             exclude_srcs: libbinder_device_interface_sources,
-        },
+        }, */
         darwin: {
             enabled: false,
         },
