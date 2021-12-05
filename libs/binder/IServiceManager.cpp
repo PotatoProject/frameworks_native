@@ -29,9 +29,9 @@
 #include <utils/String8.h>
 #include <utils/SystemClock.h>
 
-#ifndef __ANDROID_VNDK__
+/* #ifndef __ANDROID_VNDK__*/
 #include <binder/IPermissionController.h>
-#endif
+/* #endif */
 
 #ifdef __ANDROID__
 #include <cutils/properties.h>
@@ -121,7 +121,8 @@ void setDefaultServiceManager(const sp<IServiceManager>& sm) {
     }
 }
 
-#if !defined(__ANDROID_VNDK__) && defined(__ANDROID__)
+/* #if !defined(__ANDROID_VNDK__) && defined(__ANDROID__) */
+#ifdef __ANDROID__
 // IPermissionController is not accessible to vendors
 
 bool checkCallingPermission(const String16& permission)

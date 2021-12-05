@@ -45,11 +45,11 @@
 #define DEFAULT_MAX_BINDER_THREADS 15
 #define DEFAULT_ENABLE_ONEWAY_SPAM_DETECTION 1
 
-#ifdef __ANDROID_VNDK__
+/* #ifdef __ANDROID_VNDK__
 const char* kDefaultDriver = "/dev/vndbinder";
-#else
+#else */
 const char* kDefaultDriver = "/dev/binder";
-#endif
+/* #endif */
 
 // -------------------------------------------------------------------------
 

@@ -142,11 +142,11 @@ cc_library {
             },
             // b/189438896 Add exported symbols in a map file for ABI stability
             version_script: "libbinder.arm64.map",
-            target: {
+/*            target: {
                 vendor: {
                     version_script: "libbinder.arm64.vendor.map",
                 },
-            },
+            }, */
         },
         android_arm: {
             // b/189438896 Sampling PGO restricted to arm64, arm32 in sc-dev
@@ -156,11 +156,11 @@ cc_library {
             },
             // b/189438896 Add exported symbols in a map file for ABI stability
             version_script: "libbinder.arm32.map",
-            target: {
+/*            target: {
                 vendor: {
                     version_script: "libbinder.arm32.vendor.map",
                 },
-            },
+            }, */
         },
         /* vendor: {
             exclude_srcs: libbinder_device_interface_sources,

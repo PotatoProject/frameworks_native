@@ -104,12 +104,12 @@ Stability::Level Stability::getLocalLevel() {
 #error APEX can't use libbinder (must use libbinder_ndk)
 #endif
 
-#ifdef __ANDROID_VNDK__
+/* #ifdef __ANDROID_VNDK__
     return Level::VENDOR;
-#else
+#else */
     // TODO(b/139325195): split up stability levels for system/APEX.
     return Level::SYSTEM;
-#endif
+/* #endif */
 }
 
 status_t Stability::setRepr(IBinder* binder, int32_t representation, uint32_t flags) {

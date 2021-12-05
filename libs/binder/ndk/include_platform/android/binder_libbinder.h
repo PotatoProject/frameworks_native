@@ -16,7 +16,8 @@
 
 #pragma once
 
-#if !defined(__ANDROID_APEX__) && !defined(__ANDROID_VNDK__)
+/* #if !defined(__ANDROID_APEX__) && !defined(__ANDROID_VNDK__) */
+#if !defined(__ANDROID_APEX__)
 
 #include <android/binder_ibinder.h>
 #include <binder/IBinder.h>

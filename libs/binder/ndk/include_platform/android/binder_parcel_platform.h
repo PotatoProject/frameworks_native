@@ -20,7 +20,8 @@
 
 __BEGIN_DECLS
 
-#if !defined(__ANDROID_APEX__) && !defined(__ANDROID_VNDK__)
+/* #if !defined(__ANDROID_APEX__) && !defined(__ANDROID_VNDK__) */
+#if !defined(__ANDROID_APEX__)
 
 /**
  * Gets whether or not FDs are allowed by this AParcel

@@ -23,9 +23,9 @@
 
 using ::android::internal::Stability;
 
-#ifdef __ANDROID_VNDK__
+/* #ifdef __ANDROID_VNDK__
 #error libbinder_ndk should only be built in a system context
-#endif
+#endif */
 
 #ifdef __ANDROID_NDK__
 #error libbinder_ndk should only be built in a system context
