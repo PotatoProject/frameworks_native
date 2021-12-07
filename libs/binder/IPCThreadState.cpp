@@ -1398,7 +1398,7 @@ status_t IPCThreadState::getProcessFreezeInfo(pid_t pid, bool *sync_received, bo
     return ret;
 }
 
-#ifndef __ANDROID_VNDK__
+/* #ifndef __ANDROID_VNDK__ */
 status_t IPCThreadState::getProcessFreezeInfo(pid_t pid, uint32_t *sync_received,
                                               uint32_t *async_received)
 {
@@ -1415,7 +1415,7 @@ status_t IPCThreadState::getProcessFreezeInfo(pid_t pid, uint32_t *sync_received
 
     return ret;
 }
-#endif
+/* #endif */
 
 status_t IPCThreadState::freeze(pid_t pid, bool enable, uint32_t timeout_ms) {
     struct binder_freeze_info info;

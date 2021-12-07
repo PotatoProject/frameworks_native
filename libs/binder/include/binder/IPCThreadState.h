@@ -55,10 +55,10 @@ public:
                                                     bool *async_received);
 
     // TODO: Remove the above legacy duplicated function in next version
-#ifndef __ANDROID_VNDK__
+/* #ifndef __ANDROID_VNDK__ */
     static  status_t            getProcessFreezeInfo(pid_t pid, uint32_t *sync_received,
                                                     uint32_t *async_received);
-#endif
+/* #endif */
 
             sp<ProcessState>    process();
             
