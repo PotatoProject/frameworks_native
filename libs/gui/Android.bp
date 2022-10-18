@@ -409,5 +409,10 @@ cc_library_static {
         "mock/GraphicBufferProducer.cpp",
     ],
 }
-
+cc_library_shared {
+    name: "libgui_vendor",
+    vendor: true,
+    defaults: ["libgui_defaults"]
+}
 subdirs = ["tests"]
+
